@@ -1,0 +1,17 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+
+# OS
+.DS_Store
+
+# Build
+dist/
+coverage/
+
+# Docker (opcional)
+docker-compose.override.yml
