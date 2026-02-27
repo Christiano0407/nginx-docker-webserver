@@ -1,14 +1,19 @@
 # Official Base Image
-FROM nginx:latest
+FROM node:18-alpine
 
-# Default Configuration Delete (Clean, but Optional)
-RUN rm -rf /usr/share/nginx/html/*
+WORKDIR /app
 
 # Static Site Copy 
-COPY html/ /usr/share/nginx/html/
+COPY package*.json ./
+
+# Install Depends
+RUN npm install
+
+# Copy Rest Project
+COPY . .
 
 # PORT Live:80
-EXPOSE 80
+EXPOSE 3000
 
 # Command Default (Inside Image for default)
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "start"]

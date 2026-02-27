@@ -2,10 +2,9 @@
   "name": "nginx-docker-webserver",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "types": "modules",
+  "main": "./src/server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server/server.js"
   },
   "repository": {
     "type": "git",
@@ -14,12 +13,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/Christiano0407/nginx-docker-webserver/issues"
   },
   "homepage": "https://github.com/Christiano0407/nginx-docker-webserver#readme",
-  "devDependencies": {
+  "dependencies": {
     "express": "^5.2.1"
   }
 }
