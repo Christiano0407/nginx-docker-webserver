@@ -1,9 +1,9 @@
 import { Home } from "../pages/home.js"; 
-import { About } from "../pages/about.js";
+import { About } from "../pages/about.js"; 
 
 const routes = {
   "/":Home, 
-  "/about": About
+  "/about":About
 }; 
 
 export const router = {
