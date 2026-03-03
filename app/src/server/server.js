@@ -14,6 +14,15 @@ const __dirname = path.dirname(__filename);
 // === Environment Variable ===
 const INSTANCE = process.env.INSTANCE_NAME || "unknown"; 
 
+// === Debug Endpoint
+app.get("/health", (req, res) => {
+  res.json({
+    instance: INSTANCE, 
+    hostname: process.env.HOSTNAME, 
+    node_env:process.env.NODE_ENV
+  }); 
+}); 
+
 // === Static Files (Only Files Public) | src ===
 app.use(express.static(path.join(__dirname, '../')));
 
