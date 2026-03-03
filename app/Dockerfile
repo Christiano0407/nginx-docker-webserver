@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install Depends
-RUN npm install
+RUN npm install --production
 
 # Copy Rest Project
 COPY . .
