@@ -266,15 +266,20 @@ O migrar a:
 
 ---
 
-## Sobre AI, MCP y Agents
+## Sobre AI - AI Native System
 
-> Recomendaciones: IA (Inteligencia Artificial) | IA Engineer
+> Con la evolución hacia AI-native systems (LLMs, RAG, MCP, Agents, Event-Driven + Cloud), la documentación también evoluciona.
 
 - NLP | LLM (Modelos) | MCP | Agents I.A | RAG
 - Agents.md
 - Skills (Agents)
 - CLI (Agents)
-- Considera: Architecture.md | README.md | Contratos
+- Architecture.md [Documento técnico para desarrolladores, DevOps, SRE y AI Engineers.]
+
+> Ya no basta con README.md. En sistemas modernos se requieren al menos:
+
+- ARCHITECTURE.md → Diseño técnico profundo
+- AGENTS.md → Definición formal de agentes de IA y sus capacidades operativas
 
 ### ¿Se puede complementar con MCP?
 
