@@ -313,8 +313,6 @@ Para documentar cómo un agente AI podría:
 - Validar balanceo
 - Simular fallos
 
-> Eso eleva el repositorio de “demo técnico” a “demo moderno AI-assisted & DevOps”.
-
 ---
 
 ### Licencia
