@@ -80,7 +80,7 @@ App1 | App2 | App3 (Express SPA)
 
 > Cómo funciona Nginx Proxy con Load Balancer
 
-En `nginx.con`:
+En `nginx.conf`:
 
 ```nginx
 upstream backend_cluster {
@@ -100,7 +100,223 @@ upstream backend_cluster {
 - Nginx distribuye tráfico usando `least_conn`
 
 ---
+## Docker Compose 
 
-## Licencia
+> Desarrollamos tres instancias del mismo servidor. Con el fin de probar Nginx Proxy & Load Balancer.
+
+- Probamos las Variables de Entorno dentro de Docker Compose
+
+```yml
+app1:
+   environment:
+      INSTANCE_NAME: app1
+
+app2:
+   environment:
+      INSTANCE_NAME: app2
+
+app3:
+   environment:
+      INSTANCE_NAME: app3      
+
+```
+
+Esto nos permite identificar qué instancia responde cuando la vamos ejecutando.
+
+---
+
+## Ejecutar el proyecto
+
+> Principales Comandos de Docker (Considrar)
+
+- El puerto: 80 (8080:80), es el común dentro del Frontend - Web
+- El puerto: 5000, lo usamos dentro del desarrollo Backend (Python)
+
+```bash
+docker compose up --build
+```
+
+Acceder en:
+
+```bash
+http://localhost:8080
+```
+
+---
+
+## Verificar Load Balancing
+
+> Usamos 'Debbuging', para probar Load Balancing. 
+
+- Considera que realizamos un SPA (Single Page Aplication), para probar Docker con Nginx Proxy & Load Balancer.
+
+Endpoint de prueba:
+
+```bash
+GET /health
+```
+
+Ejecutar:
+
+```bash
+curl http://localhost:8080/health
+```
+
+Deberías ver alternancia entre:
+
+```json
+{
+  "instance": "app1",
+  "hostname": "...",
+  "node_env": "production"
+}
+```
+
+---
+
+## Inspeccionar Red Docker 
+
+> Docker Network
+
+Listar redes:
+
+```bash
+docker network ls
+```
+
+Inspeccionar red:
+
+```bash
+docker network inspect nginx-docker-webserver_backend
+```
+
+Ver IP interna de contenedor:
+
+```bash
+docker inspect app1
+```
+
+---
+
+## Simular caída de instancia
+
+> Paramos nuestros servidores | Docker en local
+
+```bash
+docker stop app2
+```
+
+El tráfico seguirá siendo distribuido entre app1 y app3.
+
+---
+
+## Conceptos Clave
+
+| Concepto | Explicación |
+|----------|------------|
+| Reverse Proxy | Intermediario entre cliente y backend |
+| Load Balancer | Distribuye tráfico entre instancias |
+| Bridge Network | Red interna aislada en Docker |
+| least_conn | Algoritmo que envía tráfico al servidor con menos conexiones activas |
+
+---
+
+## ¿Por qué no se usan volúmenes?
+
+> Se manejó sin bases de datos & Storage. 
+
+Este proyecto:
+
+- No usa base de datos
+- No requiere persistencia
+- Es para probar Docker + Nginx Proxy & Load Balancer
+
+Por eso no se usan named volumes.
+
+---
+
+## Escalabilidad
+
+> Considera la Arquitectura de Software | Sistemas Diseño | La capacidad de tu Host, VPS o Cload. 
+
+- Evita Deuda Técnica
+- Realiza un Plan Financiero
+
+Para escalar:
+
+```bash
+docker compose up --scale app=5
+```
+
+O migrar a:
+
+- Kubernetes
+- Ingress Controller
+- HPA (Horizontal Pod Autoscaler)
+
+---
+
+## Futuras mejoras
+
+- Agregar health checks reales
+- Implementar métricas (Prometheus)
+- Integrar CI/CD
+- Probar WebSockets
+- Añadir rate limiting en Nginx
+
+---
+
+## Sobre AI, MCP y Agents
+
+> Recomendaciones: IA (Inteligencia Artificial) | IA Engineer
+
+- NLP | LLM (Modelos) | MCP | Agents I.A | RAG
+- Agents.md
+- Skills (Agents)
+- CLI (Agents)
+- Considera: Architecture.md | README.md | Contratos
+
+### ¿Se puede complementar con MCP?
+
+> Podemos Complementar nuestros Procesos con: MCP & Agents I.A (CLI)
+
+Puedes integrar:
+
+- MCP de GitHub → automatizar documentación
+- MCP de Docker → validación de contenedores
+- Agentes AI para:
+  - Generar configuraciones
+  - Validar arquitectura
+  - Detectar errores en nginx.conf
+
+---
+
+### ¿Qué es agents.md?
+
+Es un archivo que define:
+
+- Capacidades del agente
+- Límites
+- Acciones permitidas
+- Integraciones
+
+Podrías agregar:
+
+```bash
+agents.md
+```
+
+Para documentar cómo un agente AI podría:
+
+- Levantar entorno
+- Ejecutar tests
+- Validar balanceo
+- Simular fallos
+
+> Eso eleva el repositorio de “demo técnico” a “demo moderno AI-assisted & DevOps”.
+
+---
+
+### Licencia
 
 MIT
